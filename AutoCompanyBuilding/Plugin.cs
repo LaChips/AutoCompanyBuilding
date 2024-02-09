@@ -23,6 +23,7 @@ namespace AutoCompanyBuilding
 
         public static ManualLogSource logSource;
         public static int groupCredits;
+        public static bool hasRerouted = false;
 
         private void Awake()
         {

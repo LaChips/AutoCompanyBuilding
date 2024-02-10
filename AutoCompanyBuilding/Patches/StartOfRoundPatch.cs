@@ -1,20 +1,21 @@
-﻿using BepInEx;
-using HarmonyLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HarmonyLib;
 
 namespace AutoCompanyBuilding.Patches
 {
     [HarmonyPatch(typeof(StartOfRound))]
     internal class StartOfRoundPatch
     {
+        private static GameNetworkManager ___gameNetworkManager = GameNetworkManager.Instance;
+
         [HarmonyPatch("EndOfGame")]
         [HarmonyPostfix]
         static void ResetHasRerouted()
         {
+            if (!___gameNetworkManager.isHostingGame)
+            {
+                return;
+            }
+
             AutoCompanyBuildingBase.hasRerouted = false;
         }
 
@@ -23,6 +24,12 @@ namespace AutoCompanyBuilding.Patches
         static void AutoShipToCompanyBuilding()
         {
             StartOfRound ___startofround = StartOfRound.Instance;
+
+            if (!___gameNetworkManager.isHostingGame)
+            {
+                return;
+            }
+
             if (___startofround.currentLevelID == 3)
             {
                 AutoCompanyBuildingBase.hasRerouted = true;

@@ -21,23 +21,22 @@ namespace AutoCompanyBuilding.Patches
 
         [HarmonyPatch("Update")]
         [HarmonyPostfix]
-        static void AutoShipToCompanyBuilding()
+        static void AutoShipToCompanyBuilding(StartOfRound __instance)
         {
-            StartOfRound ___startofround = StartOfRound.Instance;
 
             if (!___gameNetworkManager.isHostingGame)
             {
                 return;
             }
 
-            if (___startofround.currentLevelID == 3)
+            if (__instance.currentLevelID == 3)
             {
                 AutoCompanyBuildingBase.hasRerouted = true;
             }
-            else if (___startofround.CanChangeLevels() && TimeOfDay.Instance.daysUntilDeadline == 0 && ___startofround.currentLevelID != 3 && AutoCompanyBuildingBase.hasRerouted == false)
+            else if (__instance.CanChangeLevels() && TimeOfDay.Instance.daysUntilDeadline == 0 && __instance.currentLevelID != 3 && AutoCompanyBuildingBase.hasRerouted == false)
             {
-                ___startofround.ChangeLevelServerRpc(3, AutoCompanyBuildingBase.groupCredits);
-                ___startofround.ChangeLevel(3); // 3 -> company building
+                __instance.ChangeLevelServerRpc(3, AutoCompanyBuildingBase.groupCredits);
+                __instance.ChangeLevel(3); // 3 -> company building
                 AutoCompanyBuildingBase.hasRerouted = true;
             }
         }

@@ -10,7 +10,7 @@ namespace AutoCompanyBuilding
     {
         private const string                    PLUGIN_GUID = "La_Chips.AutoCompanyBuilding";
         private const string                    PLUGIN_NAME = "Auto Company Building";
-        private const string                    PLUGIN_VERSION = "1.1.3.0";
+        private const string                    PLUGIN_VERSION = "1.2.0.0";
 
         private readonly Harmony                harmony = new Harmony(PLUGIN_GUID);
 

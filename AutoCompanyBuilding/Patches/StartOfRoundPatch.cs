@@ -32,7 +32,7 @@ namespace AutoCompanyBuilding.Patches
             {
                 AutoCompanyBuildingBase.hasRerouted = true;
             }
-            else if (__instance.CanChangeLevels() && TimeOfDay.Instance.daysUntilDeadline == 0 && __instance.currentLevelID != 3 && AutoCompanyBuildingBase.hasRerouted == false && TimeOfDay.Instance.quotaFulfilled < TimeOfDay.Instance.profitQuota)
+            else if (__instance.CanChangeLevels() && TimeOfDay.Instance.daysUntilDeadline == 0 && AutoCompanyBuildingBase.hasRerouted == false && TimeOfDay.Instance.quotaFulfilled < TimeOfDay.Instance.profitQuota)
             {
                 __instance.ChangeLevelServerRpc(3, AutoCompanyBuildingBase.groupCredits);
                 __instance.ChangeLevel(3); // 3 -> company building
